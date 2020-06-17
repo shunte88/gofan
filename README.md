@@ -1,4 +1,4 @@
-# Looper
+# Go Fan Go!
 
 _Copyright &copy; Stuart Hunter. All rights reserved._
 
