@@ -8,7 +8,7 @@ Simple automation mechanism to trigger a TP-Link Kasa Smart Plug over wi-fi when
 
 The Pi uses an I2C BMP180, BMP280 superceeds, to determine the temperature.
 
-* Command line specification of temerature and Kasa address
+* Command line specification of trigger temperature and Kasa address
 * Scheduled to run at intervals, cron keeps it simple
 
 ## Installation
