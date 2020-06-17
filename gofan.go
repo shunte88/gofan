@@ -38,14 +38,21 @@ func init() {
 func main() {
 
     var trigger float64
+    logic := "A"
+    goodLogic := map[string]bool {
+        "A": true,
+        "B": true,
+    }
 
     if nil!=lf {
         defer lf.Close()
         logf = log.New(lf, "gotemp::", log.LstdFlags)
     }
+
     re := regexp.MustCompile(`[-]?\d[\d,]*[\.]?[\d{2}]*`)
 
-    trigp := flag.Float64("trigger", 30.00, "temperature trigger")
+    trigp := flag.Float64("trigger", 30.00, "temperature trigger limit")
+    flag.StringVar(&logic, "logic", "A", "trigger logic, [A]bove or [B]elow trigger limit")
     flag.IntVar(&address, "address", 0x77, "address of temperature sensor")
     flag.StringVar(&tphost, "host", "", "hostname of device")
     flag.Parse()
@@ -55,6 +62,12 @@ func main() {
         fmt.Println("host must be defined")
         flag.PrintDefaults()
         os.Exit(1)
+    }
+
+    logic = string(strings.ToUpper(logic)[0])
+
+    if !(goodLogic[logic]) {
+        logic = "A"
     }
 
     tp4mbh := tplink.Tplink{Host: tphost}
@@ -89,12 +102,20 @@ func main() {
     str1 := fmt.Sprintf("%s", env.Temperature)
     cf := 0.00
     match := re.FindAllString(str1, -1)
-    for _, ee := range match {
-        cf, _ = strconv.ParseFloat(ee, 32)
-        if cf > trigger {
-            turnOn(tp4mbh)
+    if len(match)>0 {
+        cf, _ = strconv.ParseFloat(match[0], 32)
+        if "A"==logic {
+            if cf > trigger {
+                turnOn(tp4mbh)
+            } else {
+                turnOff(tp4mbh)
+            }
         } else {
-            turnOff(tp4mbh)
+            if cf < trigger {
+                turnOn(tp4mbh)
+            } else {
+                turnOff(tp4mbh)
+            }
         }
     }
 
