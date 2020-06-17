@@ -2,7 +2,7 @@
 
 _Copyright &copy; Stuart Hunter. All rights reserved._
 
-Temerature trigger that runs on a Raspberry Pi Zero W
+Temperature trigger that runs on a Raspberry Pi Zero W
 
 Simple automation mechanism to trigger a TP-Link Kasa Smart Plug over wi-fi when a specified temperature limit is reached/exceeded.
 
@@ -35,7 +35,7 @@ Configure GoFan to run at intervals using cron, this provides a simple and robus
 */20 * * * * /home/pi/gofan/gofan -host tp_br1 -trigger 28.00
 ```
 
-Note that entries in /etc/hosts have been added here to echo the names given to each Kasa device in the Kasa mobile app, alternatively the IP address of thedevice may be specified
+Note that entries in /etc/hosts have been added here to echo the names given to each Kasa device in the Kasa mobile app, alternatively the IP address of the device may be specified
 
 ## TODO
 
