@@ -22,6 +22,7 @@ The Pi uses an I2C BMP180, BMP280 superceeds, to determine the temperature.
 ### Installing GoFan
 
 ```sh
+go get -d github.com/TheSp1der/tplink
 git clone https://github.com/shunte88/gofan.git
 cd gofan
 go build
