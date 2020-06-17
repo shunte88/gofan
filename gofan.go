@@ -90,14 +90,12 @@ func main() {
     cf := 0.00
     match := re.FindAllString(str1, -1)
     for _, ee := range match {
-        fmt.Println(ee)
         cf, _ = strconv.ParseFloat(ee, 32)
-        fmt.Println(cf)
-    if cf > trigger {
-        turnOn(tp4mbh)
-    } else {
-        turnOff(tp4mbh)
-    }
+        if cf > trigger {
+            turnOn(tp4mbh)
+        } else {
+            turnOff(tp4mbh)
+        }
     }
 
     s := fmt.Sprintf("%8s %10s %9s", env.Temperature, env.Pressure, env.Humidity)
